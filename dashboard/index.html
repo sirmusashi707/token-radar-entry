@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<a class="skip" href="#board">Skip to the board</a>
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Token Radar · a launch radar, not a tip sheet</p>
+    <h1>Which pre-token protocol is worth farming next?</h1>
+    <p class="lede">Every protocol below records no token yet. Each one is priced from the snapshot's own figures — what the market already pays for a token in its line of work — and each carries the concrete steps to farm it, with what they cost and how long they take.</p>
+    <dl class="stats" id="stats"></dl>
+  </div>
+</header>
+<main class="wrap" id="board">
+  <section class="how" aria-label="How the value is worked out">
+    <h2>How an implied value is worked out</h2>
+    <p><strong>Implied value = TVL × category ratio × growth × maturity × breadth × prior.</strong> The ratio is the median market-cap-to-TVL of the protocols in the same category whose token already trades (the whole snapshot's median when a category has too few); growth is the 7-day TVL change; maturity rewards time served with no token recorded; breadth rewards running on more chains; the prior is how often the category has issued a token at all. All five inputs come from the snapshot — no protocol is named by hand. The value is this entry's own claim, never make.fun's, and it says nothing about whether or when a token is issued.</p>
+    <p class="caveat"><strong>Read carefully:</strong> “records no token” means DefiLlama's record carries no token for the protocol. It is not proof the protocol has none. A token may never be issued, and farming costs real money — gas, deposits, time — for a reward that may never come.</p>
+  </section>
+  <section class="controls" aria-label="Filter and sort the board">
+    <label>Search <input id="q" type="search" placeholder="Name or slug…" autocomplete="off"></label>
+    <label>Category <select id="category"><option value="all">All categories</option></select></label>
+    <label>Chain <select id="chain"><option value="all">All chains</option></select></label>
+    <label class="check"><input id="watchlist" type="checkbox"> Watchlist only</label>
+    <label>Sort by <select id="sort">
+      <option value="implied">Implied value</option>
+      <option value="tvl">TVL</option>
+      <option value="growth">7-day growth</option>
+      <option value="age">Time with no token</option>
+      <option value="name">Name A–Z</option>
+    </select></label>
+    <div class="tabs" role="tablist" aria-label="Which protocols to show">
+      <button id="tab-pre" role="tab" aria-selected="true">Pre-token · farmable</button>
+      <button id="tab-live" role="tab" aria-selected="false">Already trading · comparables</button>
+    </div>
+  </section>
+  <p class="count" id="count" aria-live="polite"></p>
+  <div class="tablewrap">
+    <table id="table">
+      <thead><tr>
+        <th data-sort="rank" scope="col">#</th>
+        <th data-sort="name" scope="col">Protocol</th>
+        <th data-sort="category" scope="col">Category</th>
+        <th data-sort="chains" scope="col">Chains</th>
+        <th data-sort="tvl" scope="col">TVL</th>
+        <th data-sort="growth" scope="col">7d</th>
+        <th data-sort="age" scope="col">No token for</th>
+        <th data-sort="implied" scope="col">Implied value</th>
+        <th scope="col"><span class="visually-hidden">Detail</span></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="more"><button id="more" type="button">Show more rows</button></p>
+  <aside id="detail" class="detail" hidden aria-label="Protocol detail"></aside>
+</main>
+<footer class="wrap">
+  <p>Snapshot: <span id="src"></span> · Floor for the watchlist: <span id="floor"></span> · The board covers the whole 40-protocol watchlist plus every other pre-token protocol the snapshot holds that is not a wrapped, staked or bridged product. Data: DefiLlama's public protocol list, fetched once and frozen. This page makes no network requests: every byte it shows is in the data file beside it.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
